@@ -315,6 +315,7 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 .share-qr-toggle:active{color:rgba(255,255,255,.7)}
 .share-qr-wrap{margin-top:10px;background:#fff;border-radius:10px;padding:10px;justify-content:center}
 .share-qr-wrap canvas{display:block}
+.share-qr-note{color:rgba(255,255,255,.5);font-size:11px;font-weight:600;text-align:center;margin:6px 0 2px;padding:0}
 .share-hs-step{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .share-hs-step:last-child{border-bottom:none}
 .share-hs-num{width:20px;height:20px;border-radius:50%;flex-shrink:0;margin-top:1px;background:rgba(var(--accent-rgb),.18);border:1px solid rgba(var(--accent-rgb),.4);color:var(--accent);font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center}
@@ -347,7 +348,7 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
     <div class="tools-grid">
       <a class="tool-card" href="https://chatgpt.com" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:rgba(16,163,127,.15)">🤖</div>
-        <div><div class="tool-name">Cathy</div><div class="tool-desc">Notes + explain</div></div>
+        <div><div class="tool-name">ChatGPT</div><div class="tool-desc">AI tutor + explain</div></div>
       </a>
       <a class="tool-card" href="https://notebooklm.google.com" target="_blank" rel="noopener">
         <div class="tool-icon" style="background:rgba(66,133,244,.15)">📓</div>
@@ -384,13 +385,13 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
     </div>
     <div class="collapse-body">
       <div class="wf-step"><div class="step-num">1</div><div class="step-text"><strong>Photo</strong> your handwritten notes right after class</div></div>
-      <div class="wf-step"><div class="step-num">2</div><div class="step-text">Open <strong>Cathy</strong> on Chromebook, upload the photo</div></div>
-      <div class="wf-step"><div class="step-num">3</div><div class="step-text">Ask Cathy to <strong>clean up</strong> your notes into bullet points</div></div>
+      <div class="wf-step"><div class="step-num">2</div><div class="step-text">Open <strong>ChatGPT</strong> on Chromebook, upload your photo</div></div>
+      <div class="wf-step"><div class="step-num">3</div><div class="step-text">Use <strong>ChatGPT as a tutor</strong> — ask it to explain what you don't get, not just summarise. It can get things wrong, so always double-check key facts before trusting them.</div></div>
       <div class="wf-step"><div class="step-num">4</div><div class="step-text"><strong>Paste</strong> into your class Google Doc — add today's date as a header</div></div>
       <div class="wf-step"><div class="step-num">5</div><div class="step-text"><strong>NotebookLM</strong> auto-syncs — open it to chat with your notes</div></div>
       <div class="wf-step"><div class="step-num">6</div><div class="step-text">Add any new vocab to your <strong>Quizlet</strong> set for that class</div></div>
       <div class="wf-step"><div class="step-num">7</div><div class="step-text">Drop upcoming due dates into <strong>Google Tasks</strong> while you remember</div></div>
-      <div class="setup-tip" style="margin-top:8px">&#x1F916; <strong>Cathy helps you clean up and understand</strong> — always check key facts before pasting into your doc.</div>
+      <div class="setup-tip" style="margin-top:8px">&#x1F916; <strong>ChatGPT is a tutor, not a shortcut</strong> — use it to understand the material, not to do the work for you.</div>
     </div>
   </div>
 
@@ -776,8 +777,6 @@ function buildShareURLs() {
 ─────────────────────────────────────── */
 function openShare() {
   const urls = buildShareURLs();
-  document.getElementById('share-url-friend').textContent = urls.friend;
-  document.getElementById('share-url-device').textContent = urls.device;
   generateQR('share-qr-friend', urls.friend);
   generateQR('share-qr-device', urls.device);
   document.getElementById('share-hs-content').innerHTML = buildHSContent();
@@ -929,10 +928,7 @@ try {
   <div class="share-section">
     <div class="share-section-label">Share with a Friend</div>
     <div class="share-desc">They get a blank version and set it up themselves &mdash; your calendars stay private. &#x1F604;</div>
-    <div class="share-url-row">
-      <span class="share-url-text" id="share-url-friend"></span>
-      <button class="share-copy-btn" id="share-copy-friend" onclick="copyURL('friend')">Copy</button>
-    </div>
+    <button class="share-copy-btn" id="share-copy-friend" onclick="copyURL('friend')" style="width:100%;margin-bottom:8px">Copy link</button>
     <button class="share-qr-toggle" id="share-qrtoggle-friend" onclick="toggleQR('friend')">Show QR code &#x25be;</button>
     <div class="share-qr-wrap" id="share-qr-friend" style="display:none"></div>
   </div>
@@ -940,12 +936,9 @@ try {
   <div class="share-section">
     <div class="share-section-label">Send to My Other Device</div>
     <div class="share-desc">Opens fully set up &mdash; calendars and settings are encoded right in the link.</div>
-    <div class="share-url-row">
-      <span class="share-url-text" id="share-url-device"></span>
-      <button class="share-copy-btn" id="share-copy-device" onclick="copyURL('device')">Copy</button>
-    </div>
-    <button class="share-qr-toggle" id="share-qrtoggle-device" onclick="toggleQR('device')">Show QR code &#x25be;</button>
-    <div class="share-qr-wrap" id="share-qr-device" style="display:none"></div>
+    <div class="share-qr-wrap" id="share-qr-device" style="display:flex"></div>
+    <p class="share-qr-note">Scan this &#x2014; it&#x2019;s easier than copying the link.</p>
+    <button class="share-copy-btn" id="share-copy-device" onclick="copyURL('device')" style="margin-top:6px;width:100%">Copy link</button>
   </div>
   <!-- 3: Add to home screen -->
   <div class="share-section">
