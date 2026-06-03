@@ -335,7 +335,7 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
     <p class="hero-sub">Your study tools are right here 👇</p>
   </div>
   <div class="warrior">
-    <img src="https://raw.githubusercontent.com/thefieldnotes/Xandy-Study-Hub/main/warrior.png" alt="Jupiter Warriors">
+    <img src="https://raw.githubusercontent.com/thefieldnotes/my-study-hub/main/warrior.png" alt="Jupiter Warriors">
   </div>
 </div>
 
@@ -679,7 +679,7 @@ function renderCalManage() {
       +CAL_COLORS.map(function(col){
         return '<span class="cal-swatch'+(col===cal.color?' selected':'')+'"'
           +' style="background:'+col+'" data-color="'+col+'"'
-          +' onclick="pickCalColor(''+col+'')"></span>';
+          +' onclick="pickCalColor(this.dataset.color)"></span>';
       }).join('')
       +'</div>'
       +'<div class="cal-form-row">'
