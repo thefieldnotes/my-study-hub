@@ -52,11 +52,11 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 .hero-title span{color:var(--accent)}
 .hero-sub{color:rgba(255,255,255,.55);font-size:12px;font-weight:600;margin-top:8px}
 .warrior{
-  width:clamp(110px,28vw,170px);flex-shrink:0;align-self:flex-end;
+  width:clamp(110px,28vw,170px);flex-shrink:0;align-self:center;margin-right:8px;
   filter:drop-shadow(0 6px 24px rgba(var(--accent-rgb),.25));
   position:relative;z-index:1;
 }
-.warrior img{width:100%;display:block}
+.warrior img{width:100%;height:clamp(110px,28vw,170px);object-fit:contain;display:block}
 
 /* ── BODY ── */
 .body{padding:16px 16px 84px;display:flex;flex-direction:column;gap:14px}
@@ -324,6 +324,19 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 .share-copy-btn:disabled{opacity:.55;cursor:default}
 .share-qr-wrap{margin-top:10px;background:#fff;border-radius:10px;padding:10px;justify-content:center}
 .share-qr-wrap canvas{display:block}
+.qr-toggle-btn{
+  width:100%;background:none;border:1px solid rgba(255,255,255,.15);
+  border-radius:7px;color:rgba(255,255,255,.5);
+  font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;
+  padding:6px 12px;cursor:pointer;text-align:center;margin-bottom:6px;
+  -webkit-tap-highlight-color:transparent;
+}
+.qr-toggle-btn:active{background:rgba(255,255,255,.07)}
+.qr-collapse{
+  overflow:hidden;max-height:0;opacity:0;
+  transition:max-height .32s cubic-bezier(.25,.46,.45,.94),opacity .25s ease;
+}
+.qr-collapse.open{max-height:320px;opacity:1}
 .share-qr-label{color:rgba(255,255,255,.45);font-size:11px;font-weight:700;text-align:center;margin:6px 0 2px;padding:0}
 .share-qr-note{color:rgba(255,255,255,.5);font-size:11px;font-weight:600;text-align:center;margin:6px 0 2px;padding:0}
 .share-hs-step{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)}
@@ -333,7 +346,12 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 .share-hs-text strong{color:#fff}
 .share-install-btn{width:100%;padding:12px;border-radius:10px;border:none;background:var(--accent);color:#111;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;cursor:pointer;-webkit-tap-highlight-color:transparent;margin-top:4px}
 .share-install-btn:active{opacity:.85}
+.share-install-fallback{color:rgba(255,255,255,.35);font-size:11px;font-weight:600;line-height:1.6;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06)}
+.share-install-fallback strong{color:rgba(255,255,255,.6)}
 .share-info{color:rgba(255,255,255,.5);font-size:11px;font-weight:600;line-height:1.6}
+.share-hs-warn{background:rgba(255,193,7,.1);border:1.5px solid rgba(255,193,7,.4);border-radius:10px;padding:11px 13px;margin-bottom:14px;color:rgba(255,255,255,.8);font-size:11px;font-weight:600;line-height:1.6}
+.share-hs-warn strong{color:#FFC107}
+.share-hs-note{color:rgba(255,255,255,.4);font-size:11px;font-weight:600;line-height:1.6;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);margin-top:4px}
 
 /* ── SETTINGS BUTTON (hero) ── */
 .settings-btn{
@@ -520,6 +538,52 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
   color:rgba(255,255,255,.35);font-size:11px;font-weight:600;
   line-height:1.5;padding-top:4px;
 }
+
+/* ── TROPHY ROOM ── */
+.trophy-card{
+  display:flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.04);
+  border:1.5px solid rgba(var(--accent-rgb),.25);
+  border-radius:13px;padding:14px 16px;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:background .2s,border-color .2s;
+  margin-bottom:0;
+}
+.trophy-card:active{background:rgba(var(--accent-rgb),.08);border-color:rgba(var(--accent-rgb),.5)}
+.trophy-card-icon{font-size:26px;flex-shrink:0}
+.trophy-card-text{flex:1}
+.trophy-card-name{color:#fff;font-size:14px;font-weight:800;font-family:'Nunito',sans-serif}
+.trophy-card-desc{color:rgba(255,255,255,.4);font-size:11px;font-weight:600;font-family:'Nunito',sans-serif;margin-top:2px}
+.trophy-card-arrow{color:rgba(255,255,255,.25);font-size:16px}
+
+/* ── TROPHY MODAL (bottom sheet) ── */
+.trophy-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;
+  opacity:0;pointer-events:none;transition:opacity .3s}
+.trophy-overlay.open{opacity:1;pointer-events:auto}
+.trophy-sheet{position:fixed;bottom:0;left:0;right:0;
+  background:var(--hero-bg-dark);border-top:3px solid var(--accent);
+  border-radius:20px 20px 0 0;z-index:201;
+  max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  transform:translateY(100%);
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94);
+  padding-bottom:env(safe-area-inset-bottom,24px)}
+.trophy-sheet.open{transform:translateY(0)}
+.trophy-handle{width:40px;height:4px;background:rgba(255,255,255,.18);
+  border-radius:2px;margin:12px auto 0}
+.trophy-modal-header{display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px 6px}
+.trophy-modal-title{font-family:'Bebas Neue',sans-serif;color:#fff;
+  font-size:18px;letter-spacing:.5px}
+.trophy-modal-x{background:rgba(255,255,255,.1);border:none;border-radius:50%;
+  width:28px;height:28px;color:rgba(255,255,255,.65);font-size:17px;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  -webkit-tap-highlight-color:transparent}
+.trophy-modal-x:active{background:rgba(255,255,255,.2)}
+.trophy-empty{display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:40px 28px 52px;text-align:center;gap:14px}
+.trophy-empty-emoji{font-size:56px;line-height:1}
+.trophy-empty-text{color:rgba(255,255,255,.55);font-size:13px;font-weight:600;
+  font-family:'Nunito',sans-serif;line-height:1.7;max-width:260px}
 </style>
 </head>
 <body>
@@ -588,6 +652,17 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
     </div>
   </div>
 
+  <!-- TROPHY ROOM -->
+  <div class="trophy-card" onclick="openTrophy()" role="button" tabindex="0"
+    aria-label="Open Trophy Room">
+    <div class="trophy-card-icon">&#x1F3C6;</div>
+    <div class="trophy-card-text">
+      <div class="trophy-card-name">Trophy Room</div>
+      <div class="trophy-card-desc">Your wins live here</div>
+    </div>
+    <div class="trophy-card-arrow">&#x203A;</div>
+  </div>
+
   <!-- AFTER-CLASS WORKFLOW -->
   <div class="collapse-card">
     <div class="collapse-trigger" onclick="toggle(this)">
@@ -649,7 +724,8 @@ const CONFIG = {
   calendars:       [],
   logoUrl:         '',
   theme:           'custom',
-  extractedPalette: null
+  extractedPalette: null,
+  bragWallId:      ''
 };
 
 const STORAGE_KEY = 'msh_config_v1';
@@ -1058,6 +1134,13 @@ function openShare() {
   const urls = buildShareURLs();
   generateQR('share-qr-friend', urls.friend);
   generateQR('share-qr-device', urls.device);
+  // Reset QR collapse state so both are hidden on open
+  ['share-qr-friend','share-qr-device'].forEach(function(id) {
+    var w = document.getElementById(id+'-wrap');
+    if (w) w.classList.remove('open');
+    var b = document.querySelector('[data-target="'+id+'"]');
+    if (b) b.textContent = 'Show QR Code ▾';
+  });
   document.getElementById('share-hs-content').innerHTML = buildHSContent();
   document.getElementById('share-overlay').classList.add('open');
   document.getElementById('share-sheet').classList.add('open');
@@ -1127,20 +1210,37 @@ function buildHSContent() {
     return '<div class="share-info">You\'re already running this as an installed app &#x1F389;</div>';
 
   if (isIOS) return ''
+    +'<div class="share-hs-warn">'
+    +'<strong>&#x26A0;&#xFE0F; Do this first</strong> &#x2014; tap '
+    +'<strong>Send to My Other Device</strong> above, copy that link, and open it in '
+    +'<strong>Safari</strong> before continuing. If you skip this step your settings '
+    +"won't be saved when you open the app.'"
+    +'</div>'
     +'<div class="share-hs-step"><div class="share-hs-num">1</div>'
-    +'<div class="share-hs-text">Open this page in <strong>Safari</strong></div></div>'
+    +'<div class="share-hs-text">Tap <strong>...</strong> in the bottom right of Safari</div></div>'
     +'<div class="share-hs-step"><div class="share-hs-num">2</div>'
-    +'<div class="share-hs-text">Tap the <strong>Share</strong> button'
-    +' (box with arrow &#x2191;) at the bottom of the screen</div></div>'
+    +'<div class="share-hs-text">Tap <strong>Share</strong></div></div>'
     +'<div class="share-hs-step"><div class="share-hs-num">3</div>'
     +'<div class="share-hs-text">Scroll down and tap <strong>Add to Home Screen</strong></div></div>'
     +'<div class="share-hs-step"><div class="share-hs-num">4</div>'
-    +'<div class="share-hs-text">Name it and tap <strong>Add</strong>'
-    +' &#x2014; done! &#x1F389;</div></div>';
+    +'<div class="share-hs-text">If you see <strong>Open as Web App</strong> &#x2014; toggle it <strong>OFF</strong></div></div>'
+    +'<div class="share-hs-step"><div class="share-hs-num">5</div>'
+    +'<div class="share-hs-text">Tap <strong>Add</strong> in the top right</div></div>'
+    +'<div class="share-hs-note">'
+    +'<strong>Don&#x2019;t see the Open as Web App toggle?</strong> '
+    +'That&#x2019;s fine &#x2014; just tap Add. You&#x2019;re all set.'
+    +'</div>'
+    +'<div class="share-hs-note" style="border-top:none;padding-top:6px">'
+    +'Your settings are saved in the link itself &#x2014; your name, calendars, '
+    +'and colors will be there every time you open it.'
+    +'</div>';
 
   if (deferredInstallPrompt) return ''
     +'<div class="share-desc">Install as an app for one-tap access from your home screen.</div>'
-    +'<button class="share-install-btn" onclick="triggerInstall()">Install App</button>';
+    +'<button class="share-install-btn" onclick="triggerInstall()">&#x2b07; Install App</button>'
+    +'<div class="share-install-fallback">Not seeing the install button? '
+    +'Tap the <strong>three dots</strong> in the top right of Chrome '
+    +'&#x2192; tap <strong>Add to Home Screen</strong></div>';
 
   return '<div class="share-info">'
     +'In <strong style="color:#fff">Chrome</strong>: tap &#x22ee; menu'
@@ -1582,6 +1682,65 @@ function showSavedToast() {
   }, 1500);
 }
 
+
+/* ─────────────────────────────────────────
+   Trophy Room modal — open / close / swipe
+─────────────────────────────────────────── */
+function openTrophy() {
+  document.getElementById('trophy-overlay').classList.add('open');
+  document.getElementById('trophy-sheet').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeTrophy() {
+  document.getElementById('trophy-overlay').classList.remove('open');
+  document.getElementById('trophy-sheet').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Swipe-down to dismiss on iPhone Safari
+(function() {
+  var sheet, startY, currentY, isDragging = false;
+  document.addEventListener('DOMContentLoaded', function() {
+    sheet = document.getElementById('trophy-sheet');
+    sheet.addEventListener('touchstart', function(e) {
+      if (e.touches.length !== 1) return;
+      startY = e.touches[0].clientY;
+      isDragging = true;
+      sheet.style.transition = 'none';
+    }, {passive: true});
+    sheet.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      currentY = e.touches[0].clientY;
+      var dy = Math.max(0, currentY - startY);
+      sheet.style.transform = 'translateY(' + dy + 'px)';
+    }, {passive: true});
+    sheet.addEventListener('touchend', function() {
+      if (!isDragging) return;
+      isDragging = false;
+      sheet.style.transition = '';
+      var dy = currentY - startY;
+      if (dy > 80) {
+        closeTrophy();
+        sheet.style.transform = '';
+      } else {
+        sheet.style.transform = '';
+      }
+    });
+  });
+})();
+
+/* ─────────────────────────────────────────
+   QR code collapse toggle
+─────────────────────────────────────────── */
+function toggleQRCollapse(btn) {
+  var id   = btn.dataset.target;
+  var wrap = document.getElementById(id + '-wrap');
+  if (!wrap) return;
+  var opening = !wrap.classList.contains('open');
+  wrap.classList.toggle('open');
+  btn.textContent = opening ? 'Hide QR Code ▴' : 'Show QR Code ▾';
+}
+
 /* ═══════════════════════════════════════
    INITIALISE
 ═══════════════════════════════════════ */
@@ -1642,16 +1801,22 @@ window.addEventListener('offline', renderCalendarEmbed);
   <div class="share-section">
     <div class="share-section-label">Share with a Friend</div>
     <div class="share-desc">They get a blank version and set it up themselves &mdash; your calendars stay private. &#x1F604;</div>
-    <div class="share-qr-wrap" id="share-qr-friend" style="display:flex"></div>
-    <div class="share-qr-label">Share with a Friend</div>
+    <button class="qr-toggle-btn" data-target="share-qr-friend" onclick="toggleQRCollapse(this)">Show QR Code &#x25be;</button>
+    <div class="qr-collapse" id="share-qr-friend-wrap">
+      <div class="share-qr-wrap" id="share-qr-friend"></div>
+      <div class="share-qr-label">Share with a Friend</div>
+    </div>
     <button class="share-copy-btn" id="share-copy-friend" onclick="copyURL('friend')" style="width:100%;margin-top:8px">Copy link</button>
   </div>
   <!-- 2: Send to my other device -->
   <div class="share-section">
     <div class="share-section-label">Send to My Other Device</div>
     <div class="share-desc">Opens fully set up &mdash; calendars and settings are encoded right in the link.</div>
-    <div class="share-qr-wrap" id="share-qr-device" style="display:flex"></div>
-    <div class="share-qr-label">Send to My Other Device</div>
+    <button class="qr-toggle-btn" data-target="share-qr-device" onclick="toggleQRCollapse(this)">Show QR Code &#x25be;</button>
+    <div class="qr-collapse" id="share-qr-device-wrap">
+      <div class="share-qr-wrap" id="share-qr-device"></div>
+      <div class="share-qr-label">Send to My Other Device</div>
+    </div>
     <button class="share-copy-btn" id="share-copy-device" onclick="copyURL('device')" style="margin-top:8px;width:100%">Copy link</button>
   </div>
   <!-- 3: Add to home screen -->
@@ -1739,6 +1904,20 @@ window.addEventListener('offline', renderCalendarEmbed);
           oninput="onMascotInput(this.value)">
       </div>
     </div>
+  </div>
+</div>
+
+<!-- TROPHY ROOM MODAL -->
+<div class="trophy-overlay" id="trophy-overlay" onclick="closeTrophy()"></div>
+<div class="trophy-sheet" id="trophy-sheet">
+  <div class="trophy-handle"></div>
+  <div class="trophy-modal-header">
+    <span class="trophy-modal-title">&#x1F3C6; Trophy Room</span>
+    <button class="trophy-modal-x" onclick="closeTrophy()" aria-label="Close">&times;</button>
+  </div>
+  <div class="trophy-empty">
+    <div class="trophy-empty-emoji">&#x1F3C6;</div>
+    <div class="trophy-empty-text">Your wins go here &mdash; grades, goals, moments you&rsquo;re proud of. Coming soon.</div>
   </div>
 </div>
 </body>

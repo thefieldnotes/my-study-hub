@@ -4,7 +4,7 @@
    Google Calendar and cross-origin requests
    always go to the network.
 ─────────────────────────────────────────── */
-const CACHE = 'study-hub-v1';
+const CACHE = 'study-hub-v2';
 const SHELL = [
   './index.html',
   './manifest.json',
