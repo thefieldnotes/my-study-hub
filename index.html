@@ -529,7 +529,7 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
   <div class="hero-text">
     <div id="cfg-hero-tag" class="hero-tag"></div>
     <div id="cfg-hero-title" class="hero-title"></div>
-    <p class="hero-sub">Your study tools are right here 👇</p>
+    <p class="hero-sub" id="cfg-hero-sub">Your study tools are right here 👇</p>
   </div>
   <button class="settings-btn" onclick="openSettings()" aria-label="Settings">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -638,14 +638,14 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 ═══════════════════════════════════════ */
 const CONFIG = {
   v: 1,
-  name:       "Xandy",
-  school:     "Jupiter High School",
-  mascot:     "Warriors",
+  name:       "",
+  school:     "",
+  mascot:     "",
   accent:     "#F5C000",
   heroBg:     "#1A5C2A",
   heroBgDark: "#0d3318",
   pageBg:     "#0d1f10",
-  footerText: "Jupiter High School &nbsp;&middot;&nbsp; Home of the Warriors",
+  footerText: "",
   calendars:       [],
   logoUrl:         '',
   theme:           'custom',
@@ -712,14 +712,23 @@ function applyConfig() {
   const hex = CONFIG.accent.replace('#','');
   root.style.setProperty('--accent-rgb',
     parseInt(hex.slice(0,2),16)+', '+parseInt(hex.slice(2,4),16)+', '+parseInt(hex.slice(4,6),16));
-  document.title = CONFIG.name + "'s Study Hub";
-  const city = CONFIG.school.split(' ')[0];
-  document.getElementById('cfg-hero-tag').textContent  = '\u26a1 ' + city + ' ' + CONFIG.mascot;
-  document.getElementById('cfg-hero-title').innerHTML  = 'Hey,<br><span>' + CONFIG.name + '.</span>';
-  document.getElementById('cfg-footer').innerHTML      = CONFIG.footerText;
-  // Sync PWA meta tags so home-screen icon label and chrome colour match CONFIG
+  // Ch1: tag pill
+  document.getElementById('cfg-hero-tag').textContent =
+    CONFIG.mascot ? '\u26a1 ' + CONFIG.mascot : '\u26a1 MY STUDY HUB';
+  // Ch2+3: name line — '.' → '!', default YOU
+  document.getElementById('cfg-hero-title').innerHTML =
+    'Hey,<br><span>' + (CONFIG.name || 'YOU') + '!</span>';
+  // Ch4: subtitle — settings nudge until name is set
+  var _sub = document.getElementById('cfg-hero-sub');
+  if (_sub) _sub.innerHTML = CONFIG.name
+    ? 'Your study tools are right here &#x1F447;'
+    : 'Your study tools are right here \u2014 tap &#x2699;&#xFE0F; to make it yours';
+  // Footer
+  document.getElementById('cfg-footer').innerHTML = CONFIG.footerText;
+  // PWA
+  document.title = CONFIG.name ? CONFIG.name + "'s Study Hub" : 'Study Hub';
   const pwaTitle = document.getElementById('pwa-title');
-  if (pwaTitle) pwaTitle.setAttribute('content', CONFIG.name + "'s Hub");
+  if (pwaTitle) pwaTitle.setAttribute('content', CONFIG.name ? CONFIG.name + "'s Hub" : 'Study Hub');
   const pwaTheme = document.getElementById('pwa-theme');
   if (pwaTheme) pwaTheme.setAttribute('content', CONFIG.heroBg);
   // Swap hero logo
@@ -1516,8 +1525,14 @@ function saveConfig() {
    fields, repaints dashboard, saves.
 ─────────────────────────────────────────── */
 function _rebuildFooter() {
-  CONFIG.footerText = CONFIG.school +
-    ' &nbsp;&middot;&nbsp; Home of the ' + CONFIG.mascot;
+  if (CONFIG.school && CONFIG.mascot) {
+    CONFIG.footerText = CONFIG.school +
+      ' &nbsp;&middot;&nbsp; Home of the ' + CONFIG.mascot;
+  } else if (CONFIG.school) {
+    CONFIG.footerText = CONFIG.school;
+  } else {
+    CONFIG.footerText = '';
+  }
 }
 function onNameInput(v) {
   CONFIG.name = v;
@@ -1579,6 +1594,16 @@ try {
   if (!configured) showWelcomeBanner();
 } catch(e) {
   // Silent fallback — page renders with hardcoded defaults if init fails
+}
+
+/* ── Ch5: default color extraction on unconfigured first load ── */
+if (!CONFIG.logoUrl && !CONFIG.extractedPalette) {
+  window._pendingPaletteUrl =
+    'https://raw.githubusercontent.com/thefieldnotes/my-study-hub/main/logo.png';
+  if (typeof Vibrant !== 'undefined') {
+    extractPalette(window._pendingPaletteUrl);
+    window._pendingPaletteUrl = null;
+  }
 }
 
 /* ── Service worker registration ── */
