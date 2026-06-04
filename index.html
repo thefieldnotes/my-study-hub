@@ -64,7 +64,7 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 /* ── SECTION LABEL ── */
 .section-label{
   font-size:9px;font-weight:900;letter-spacing:3px;
-  text-transform:uppercase;color:#F5C000;margin-bottom:10px;
+  text-transform:uppercase;color:var(--accent);margin-bottom:10px;
 }
 
 /* ── TOOLS GRID ── */
@@ -90,7 +90,7 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
   font-size:17px;flex-shrink:0;
 }
 .tool-name{color:#fff;font-weight:800;font-size:12px;line-height:1.2}
-.tool-desc{color:rgba(255,255,255,.4);font-size:10px;margin-top:2px}
+.tool-desc{color:rgba(255,255,255,.4);font-size:11px;margin-top:2px}
 
 /* ── COLLAPSIBLE CARD ── */
 .collapse-card{
@@ -245,6 +245,8 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 .welcome-body{color:rgba(255,255,255,.6);font-size:11px;line-height:1.6;font-weight:600}
 .welcome-dismiss{background:none;border:none;padding:2px 4px;color:rgba(255,255,255,.3);font-size:20px;line-height:1;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
 .welcome-dismiss:active{color:rgba(255,255,255,.7)}
+.welcome-action-btn{display:inline-block;margin-top:10px;background:var(--accent);color:#111;border:none;border-radius:8px;padding:8px 14px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.welcome-action-btn:active{opacity:.82}
 
 /* ── CALENDAR PILLS ── */
 .cal-pills{display:flex;flex-wrap:wrap;gap:7px;padding:12px 14px;border-top:1px solid rgba(255,255,255,.06)}
@@ -262,7 +264,16 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 
 /* ── CALENDAR MANAGE FORM ── */
 .cal-list{display:flex;flex-direction:column;gap:7px}
-.cal-list-item{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:9px 10px}
+.cal-list-item{display:flex;flex-direction:column;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:10px 12px}
+.cal-list-main{display:flex;align-items:center;gap:9px}
+.cal-editable-row{display:flex;align-items:center;justify-content:space-between;padding:0 2px}
+.cal-editable-label{color:rgba(255,255,255,.4);font-size:11px;font-weight:600}
+.cal-toggle{position:relative;width:38px;height:22px;border-radius:11px;border:none;cursor:pointer;flex-shrink:0;transition:background .2s;-webkit-tap-highlight-color:transparent}
+.cal-toggle.on{background:#34A853}
+.cal-toggle.off{background:rgba(255,255,255,.18)}
+.cal-toggle::after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:2px;transition:left .2s}
+.cal-toggle.on::after{left:18px}
+.cal-toggle.off::after{left:2px}
 .cal-list-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 .cal-list-name{flex:1;color:#fff;font-size:12px;font-weight:700;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .cal-list-btn{background:none;border:none;font-size:13px;color:rgba(255,255,255,.35);cursor:pointer;padding:4px 5px;border-radius:6px;line-height:1;-webkit-tap-highlight-color:transparent}
@@ -296,7 +307,7 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 .share-overlay.open{opacity:1;pointer-events:auto}
 
 /* ── SHARE SHEET ── */
-.share-sheet{position:fixed;bottom:0;left:0;right:0;background:#132b17;border-top:3px solid var(--accent);border-radius:20px 20px 0 0;z-index:201;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform .35s cubic-bezier(.25,.46,.45,.94);padding-bottom:env(safe-area-inset-bottom,20px)}
+.share-sheet{position:fixed;bottom:0;left:0;right:0;background:var(--hero-bg-dark);border-top:3px solid var(--accent);border-radius:20px 20px 0 0;z-index:201;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform .35s cubic-bezier(.25,.46,.45,.94);padding-bottom:env(safe-area-inset-bottom,20px)}
 .share-sheet.open{transform:translateY(0)}
 .share-handle{width:40px;height:4px;background:rgba(255,255,255,.18);border-radius:2px;margin:12px auto 0}
 .share-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px 6px}
@@ -311,10 +322,9 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 .share-copy-btn{background:var(--accent);color:#111;border:none;border-radius:7px;padding:6px 12px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;white-space:nowrap}
 .share-copy-btn:active{opacity:.8}
 .share-copy-btn:disabled{opacity:.55;cursor:default}
-.share-qr-toggle{background:none;border:none;padding:0;cursor:pointer;color:rgba(255,255,255,.38);font-size:11px;font-weight:700;font-family:'Nunito',sans-serif;-webkit-tap-highlight-color:transparent}
-.share-qr-toggle:active{color:rgba(255,255,255,.7)}
 .share-qr-wrap{margin-top:10px;background:#fff;border-radius:10px;padding:10px;justify-content:center}
 .share-qr-wrap canvas{display:block}
+.share-qr-label{color:rgba(255,255,255,.45);font-size:11px;font-weight:700;text-align:center;margin:6px 0 2px;padding:0}
 .share-qr-note{color:rgba(255,255,255,.5);font-size:11px;font-weight:600;text-align:center;margin:6px 0 2px;padding:0}
 .share-hs-step{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)}
 .share-hs-step:last-child{border-bottom:none}
@@ -324,6 +334,192 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
 .share-install-btn{width:100%;padding:12px;border-radius:10px;border:none;background:var(--accent);color:#111;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;cursor:pointer;-webkit-tap-highlight-color:transparent;margin-top:4px}
 .share-install-btn:active{opacity:.85}
 .share-info{color:rgba(255,255,255,.5);font-size:11px;font-weight:600;line-height:1.6}
+
+/* ── SETTINGS BUTTON (hero) ── */
+.settings-btn{
+  position:absolute;top:14px;right:14px;
+  background:rgba(255,255,255,.1);border:none;border-radius:50%;
+  width:32px;height:32px;color:rgba(255,255,255,.7);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  z-index:2;-webkit-tap-highlight-color:transparent;
+}
+.settings-btn:active{background:rgba(255,255,255,.22);color:#fff}
+.settings-btn svg{display:block}
+
+/* ── SETTINGS PAGE ── */
+.settings-page{
+  position:fixed;inset:0;
+  background:var(--page-bg);
+  z-index:300;
+  transform:translateX(100%);
+  transition:transform .38s cubic-bezier(.25,.46,.45,.94);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.settings-page.open{transform:translateX(0)}
+.settings-header{
+  flex-shrink:0;
+  display:flex;align-items:center;gap:12px;
+  padding:env(safe-area-inset-top,0) 0 0;
+  background:linear-gradient(135deg,var(--hero-bg) 0%,var(--hero-bg-dark) 70%);
+  border-bottom:3px solid var(--accent);
+}
+.settings-header-inner{
+  display:flex;align-items:center;gap:12px;
+  padding:16px 18px;width:100%;
+}
+.settings-save-btn{
+  background:var(--accent);color:#111;border:none;border-radius:8px;
+  padding:8px 16px;flex-shrink:0;
+  font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+}
+.settings-save-btn:active{opacity:.82}
+.settings-toast{
+  position:fixed;bottom:90px;left:50%;
+  transform:translateX(-50%) translateY(12px);
+  background:var(--hero-bg);border:1.5px solid var(--accent);
+  color:var(--accent);font-family:'Nunito',sans-serif;
+  font-size:13px;font-weight:800;padding:9px 20px;
+  border-radius:30px;opacity:0;pointer-events:none;
+  transition:opacity .18s,transform .18s;z-index:400;white-space:nowrap;
+}
+.settings-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.settings-title{
+  font-family:'Bebas Neue',sans-serif;
+  color:#fff;font-size:24px;letter-spacing:.5px;flex:1;
+}
+.settings-body{
+  flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:24px 18px 100px;
+  display:flex;flex-direction:column;gap:20px;
+}
+
+/* ── SETTINGS FORM ── */
+.settings-section{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;padding:16px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.settings-section-label{
+  color:var(--accent);font-size:9px;font-weight:900;
+  letter-spacing:2.5px;text-transform:uppercase;
+}
+.settings-field{display:flex;flex-direction:column;gap:5px}
+.settings-label{color:rgba(255,255,255,.7);font-size:12px;font-weight:700}
+.settings-input{
+  width:100%;background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.1);border-radius:9px;
+  padding:10px 13px;color:#fff;
+  font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;
+  outline:none;-webkit-appearance:none;
+}
+.settings-input::placeholder{color:rgba(255,255,255,.28)}
+.settings-input:focus{border-color:rgba(var(--accent-rgb),.55)}
+
+/* ── LOGO MANAGEMENT ── */
+.logo-upload-btn{
+  width:100%;padding:12px;border-radius:9px;
+  border:1.5px dashed rgba(var(--accent-rgb),.4);
+  background:rgba(var(--accent-rgb),.05);
+  color:var(--accent);
+  font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  text-align:center;
+}
+.logo-upload-btn:active{background:rgba(var(--accent-rgb),.14)}
+.logo-status{
+  font-size:11px;font-weight:600;color:rgba(255,255,255,.5);
+  min-height:16px;margin-top:6px;text-align:center;
+}
+.logo-preview-wrap{
+  align-items:center;gap:12px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;padding:10px 12px;
+}
+.logo-preview-img{
+  width:52px;height:52px;object-fit:contain;
+  border-radius:8px;background:#fff;flex-shrink:0;
+}
+.logo-preview-info{display:flex;flex-direction:column;gap:4px;flex:1}
+.logo-preview-label{color:rgba(255,255,255,.55);font-size:11px;font-weight:600}
+.logo-remove-btn{
+  background:none;border:none;padding:0;
+  color:rgba(255,255,255,.4);font-size:11px;font-weight:700;
+  cursor:pointer;font-family:'Nunito',sans-serif;text-align:left;
+  -webkit-tap-highlight-color:transparent;
+}
+.logo-remove-btn:active{color:rgba(255,255,255,.8)}
+.logo-url-error{
+  font-size:11px;font-weight:600;color:#EA4335;margin-top:5px;line-height:1.5;
+}
+
+/* ── THEME SELECTOR ── */
+.theme-options{
+  display:flex;gap:10px;flex-wrap:wrap;
+}
+.theme-option{
+  flex:1;min-width:80px;
+  background:rgba(255,255,255,.04);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:12px;padding:10px 8px;
+  cursor:pointer;text-align:center;
+  -webkit-tap-highlight-color:transparent;
+  transition:border-color .15s;
+}
+.theme-option.selected{
+  border-color:var(--accent);
+  background:rgba(var(--accent-rgb),.08);
+}
+.theme-option:active{opacity:.75}
+.theme-preview{
+  width:100%;aspect-ratio:2/1;border-radius:8px;
+  overflow:hidden;margin-bottom:7px;
+  position:relative;
+}
+.theme-preview-bg{
+  width:100%;height:100%;
+  display:flex;align-items:flex-end;justify-content:flex-end;
+  padding:4px;
+}
+.theme-preview-accent{
+  width:40%;height:6px;border-radius:3px;
+}
+.theme-option-label{
+  color:rgba(255,255,255,.7);font-size:10px;font-weight:800;
+  letter-spacing:.5px;text-transform:uppercase;
+}
+.theme-option.selected .theme-option-label{color:var(--accent)}
+.custom-pickers{
+  display:flex;gap:12px;padding-top:4px;
+}
+.custom-pickers .settings-field{flex:1}
+.color-picker-wrap{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:9px;padding:7px 11px;
+}
+.color-picker-swatch{
+  width:28px;height:28px;border-radius:6px;
+  border:2px solid rgba(255,255,255,.2);
+  cursor:pointer;flex-shrink:0;
+  -webkit-appearance:none;padding:0;
+}
+.color-picker-swatch::-webkit-color-swatch-wrapper{padding:0}
+.color-picker-swatch::-webkit-color-swatch{border:none;border-radius:4px}
+.color-picker-hex{
+  flex:1;background:none;border:none;
+  color:rgba(255,255,255,.8);font-family:'Nunito',sans-serif;
+  font-size:12px;font-weight:600;outline:none;
+  text-transform:uppercase;
+}
+.theme-hint{
+  color:rgba(255,255,255,.35);font-size:11px;font-weight:600;
+  line-height:1.5;padding-top:4px;
+}
 </style>
 </head>
 <body>
@@ -335,8 +531,23 @@ html,body{min-height:100%;background:var(--page-bg);font-family:'Nunito',sans-se
     <div id="cfg-hero-title" class="hero-title"></div>
     <p class="hero-sub">Your study tools are right here 👇</p>
   </div>
+  <button class="settings-btn" onclick="openSettings()" aria-label="Settings">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06
+        a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09
+        A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06
+        A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09
+        A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06
+        A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09
+        a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06
+        A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09
+        a1.65 1.65 0 0 0-1.51 1z"/>
+    </svg>
+  </button>
   <div class="warrior">
-    <img src="https://raw.githubusercontent.com/thefieldnotes/my-study-hub/main/warrior.png" alt="Jupiter Warriors">
+    <img id="hero-logo" src="https://raw.githubusercontent.com/thefieldnotes/my-study-hub/main/logo.png" alt="School logo">
   </div>
 </div>
 
@@ -435,7 +646,10 @@ const CONFIG = {
   heroBgDark: "#0d3318",
   pageBg:     "#0d1f10",
   footerText: "Jupiter High School &nbsp;&middot;&nbsp; Home of the Warriors",
-  calendars:  []
+  calendars:       [],
+  logoUrl:         '',
+  theme:           'custom',
+  extractedPalette: null
 };
 
 const STORAGE_KEY = 'msh_config_v1';
@@ -508,6 +722,10 @@ function applyConfig() {
   if (pwaTitle) pwaTitle.setAttribute('content', CONFIG.name + "'s Hub");
   const pwaTheme = document.getElementById('pwa-theme');
   if (pwaTheme) pwaTheme.setAttribute('content', CONFIG.heroBg);
+  // Swap hero logo
+  var heroLogo = document.getElementById('hero-logo');
+  if (heroLogo) heroLogo.src = CONFIG.logoUrl ||
+    'https://raw.githubusercontent.com/thefieldnotes/my-study-hub/main/logo.png';
 }
 
 /* ───────────────────────────────────────
@@ -530,33 +748,66 @@ function toggleCalManage(trigger) {
    First-run welcome banner
    NOTE: emoji as HTML entities inside innerHTML
 ─────────────────────────────────────── */
+/* ─────────────────────────────────────────
+   Step 6 — first-run banner helpers
+─────────────────────────────────────────── */
+function isSetupComplete() {
+  return CONFIG.name.trim()   !== '' &&
+         CONFIG.school.trim() !== '' &&
+         CONFIG.calendars && CONFIG.calendars.length > 0;
+}
+
+function _isWelcomed() {
+  // Check welcomed flag stored inside the config object (aligned with STORAGE_KEY)
+  // Also accepts legacy msh_welcomed key from Phase 1
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (raw && JSON.parse(raw).welcomed) return true;
+  } catch(_) {}
+  try { if (localStorage.getItem('msh_welcomed')) return true; } catch(_) {}
+  return false;
+}
+
 function showWelcomeBanner() {
-  try { if (localStorage.getItem('msh_welcomed')) return; } catch(_) {}
+  if (_isWelcomed() || isSetupComplete()) return;
   const banner = document.createElement('div');
   banner.className = 'welcome-banner';
   banner.id = 'welcome-banner';
   banner.innerHTML =
     '<span class="welcome-emoji">&#x1F44B;</span>'
     + '<div class="welcome-content">'
-    + '<div class="welcome-title">This page isn\'t set up yet!</div>'
-    + '<div class="welcome-body">Once it\'s set up for you, your name, school, and calendars'
-    + ' will show up here. Tap "Manage your calendars" below to get started &mdash;'
-    + ' it only takes a few minutes. No rush though, you can always do it later. &#x1F60A;</div>'
+    + '<div class="welcome-title">Make this yours!</div>'
+    + '<div class="welcome-body">Add your name, school, and first calendar'
+    + ' &mdash; it takes about 2 minutes.</div>'
+    + '<button class="welcome-action-btn" onclick="onWelcomeSetup()">Set it up now &#x2192;</button>'
     + '</div>'
     + '<button class="welcome-dismiss" onclick="dismissWelcome()" aria-label="Dismiss">&#xd7;</button>';
   const body = document.querySelector('.body');
   body.insertBefore(banner, body.firstChild);
 }
+
 function dismissWelcome() {
   const el = document.getElementById('welcome-banner');
   if (el) el.remove();
-  try { localStorage.setItem('msh_welcomed','1'); } catch(_) {}
+  // Store welcomed flag inside the config object, aligned with STORAGE_KEY
+  try {
+    var cfg = { v: CONFIG.v };
+    try { var raw = localStorage.getItem(STORAGE_KEY); if (raw) cfg = JSON.parse(raw); } catch(_) {}
+    cfg.welcomed = true;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
+  } catch(_) {}
+}
+
+function onWelcomeSetup() {
+  dismissWelcome();
+  openSettings();
 }
 
 /* ───────────────────────────────────────
    Calendar — constants + state
 ─────────────────────────────────────── */
-const CAL_COLORS = ['#4285F4','#EA4335','#34A853','#FF6D00','#8F00FF','#00BCD4','#E91E63','#F5C000'];
+const CAL_COLORS = ['#4285F4','#EA4335','#34A853','#FF6D00','#8F00FF','#00BCD4','#E91E63'];
+function getCalColors() { return CAL_COLORS.concat([CONFIG.accent]); }
 const MAX_CALENDARS = 5;
 let calFormMode = null; // null=closed  -1=add  >=0=edit index
 
@@ -601,6 +852,16 @@ function renderCalendarEmbed() {
       + '<div class="cal-placeholder-icon">&#x1F4C5;</div>'
       + '<div class="cal-placeholder-text"><strong>No calendars added yet</strong>'
       + 'Tap &#x201C;Manage your calendars&#x201D; below to add your first one.</div>'
+      + '</div>';
+    return;
+  }
+  // Offline — show friendly message instead of broken iframe
+  if (!navigator.onLine) {
+    wrap.innerHTML =
+      '<div class="cal-placeholder">'
+      + '<div class="cal-placeholder-icon">&#x1F4F5;</div>'
+      + '<div class="cal-placeholder-text"><strong>Calendar needs internet to load</strong>'
+      + 'Everything else still works fine. &#x1F44D;</div>'
       + '</div>';
     return;
   }
@@ -652,6 +913,7 @@ function renderCalManage() {
     cals.forEach(function(c,i) {
       const lk = !c.editable;
       h += '<div class="cal-list-item">'
+        +'<div class="cal-list-main">'
         +'<span class="cal-list-dot" style="background:'+c.color+'"></span>'
         +'<span class="cal-list-name">'+esc(c.name)+'</span>'
         +'<button class="cal-list-btn'+(lk?' locked':'')+'"'
@@ -660,6 +922,14 @@ function renderCalManage() {
         +'<button class="cal-list-btn'+(lk?' locked':' danger')+'"'
         +(lk?'':' onclick="removeCalendar('+i+')"')
         +' title="'+(lk?'Locked':'Remove')+'">&#x1F5D1;&#xFE0F;</button>'
+        +'</div>'
+        +'<div class="cal-editable-row">'
+        +'<span class="cal-editable-label">'+(lk?'&#x1F512; Shared — view only':'I manage this calendar')+'</span>'
+        +'<button class="cal-toggle '+(lk?'off':'on')+'"'
+        +' data-idx="'+i+'"'
+        +' onclick="toggleCalEditable(this.dataset.idx)"'
+        +' aria-label="'+(lk?'Off':'On')+'"></button>'
+        +'</div>'
         +'</div>';
     });
     h += '</div>';
@@ -671,13 +941,13 @@ function renderCalManage() {
       : '<div class="setup-tip" style="margin-top:6px"><strong>Max '+MAX_CALENDARS+' calendars.</strong> Remove one to add another.</div>';
   } else {
     const isEdit = calFormMode >= 0;
-    const cal = isEdit ? cals[calFormMode] : {name:'',id:'',color:CAL_COLORS[0]};
+    const cal = isEdit ? cals[calFormMode] : {name:'',id:'',color:getCalColors()[0]};
     h += '<div class="cal-form" id="cal-form">'
       +'<div class="cal-form-label">'+(isEdit?'Edit calendar':'Add a calendar')+'</div>'
       +'<input class="cal-input" id="cal-f-name" placeholder="Name (e.g. School)" maxlength="40" value="'+esc(cal.name)+'">'
       +'<input class="cal-input" id="cal-f-id" placeholder="Calendar ID (e.g. abc@gmail.com)" value="'+esc(cal.id)+'">'
       +'<div class="cal-colors">'
-      +CAL_COLORS.map(function(col){
+      +getCalColors().map(function(col){
         return '<span class="cal-swatch'+(col===cal.color?' selected':'')+'"'
           +' style="background:'+col+'" data-color="'+col+'"'
           +' onclick="pickCalColor(this.dataset.color)"></span>';
@@ -731,7 +1001,7 @@ function submitCalForm(editIdx) {
   idEl.classList.toggle('err',!calId);
   if (!name||!calId) return;
   const sel   = document.querySelector('.cal-swatch.selected');
-  const color = sel ? sel.dataset.color : CAL_COLORS[0];
+  const color = sel ? sel.dataset.color : getCalColors()[0];
   if (editIdx>=0) {
     CONFIG.calendars[editIdx] = Object.assign({},CONFIG.calendars[editIdx],{name,id:calId,color});
   } else {
@@ -820,14 +1090,6 @@ function _fallbackCopy(text, cb) {
 /* ───────────────────────────────────────
    QR code toggle + generation
 ─────────────────────────────────────── */
-function toggleQR(type) {
-  const wrap   = document.getElementById('share-qr-'+type);
-  const toggle = document.getElementById('share-qrtoggle-'+type);
-  if (!wrap) return;
-  const vis = wrap.style.display !== 'none';
-  wrap.style.display = vis ? 'none' : 'flex';
-  if (toggle) toggle.innerHTML = vis ? 'Show QR code &#x25be;' : 'Hide QR code &#x25b4;';
-}
 function generateQR(containerId, url) {
   const el = document.getElementById(containerId);
   if (!el||!url) return;
@@ -887,6 +1149,424 @@ function triggerInstall() {
   });
 }
 
+
+/* ─────────────────────────────────────────
+   Logo management — Step 3
+─────────────────────────────────────────── */
+var DEFAULT_LOGO = 'https://raw.githubusercontent.com/thefieldnotes/my-study-hub/main/logo.png';
+
+function applyLogoUrl(url) {
+  CONFIG.logoUrl = url;
+  // Trigger color extraction when a logo is set
+  if (url) {
+    if (typeof Vibrant !== 'undefined') { extractPalette(url); }
+    else { window._pendingPaletteUrl = url; }
+  } else {
+    CONFIG.extractedPalette = null;
+    renderThemeSection();
+  }
+  var heroLogo = document.getElementById('hero-logo');
+  if (heroLogo) heroLogo.src = url || DEFAULT_LOGO;
+  var pw = document.getElementById('logo-preview-wrap');
+  var pi = document.getElementById('logo-preview');
+  if (pw && pi) {
+    if (url) { pi.src = url; pw.style.display = 'flex'; }
+    else pw.style.display = 'none';
+  }
+  saveConfig();
+}
+
+function compressImage(file, maxBytes) {
+  return new Promise(function(resolve, reject) {
+    var img = new Image();
+    var objUrl = URL.createObjectURL(file);
+    img.onload = function() {
+      URL.revokeObjectURL(objUrl);
+      var canvas = document.createElement('canvas');
+      var MAX_DIM = 1200;
+      var w = img.width, h = img.height;
+      if (w > MAX_DIM || h > MAX_DIM) {
+        if (w >= h) { h = Math.round(h * MAX_DIM / w); w = MAX_DIM; }
+        else { w = Math.round(w * MAX_DIM / h); h = MAX_DIM; }
+      }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      var q = 0.85;
+      (function tryExport() {
+        canvas.toBlob(function(blob) {
+          if (!blob) { reject(new Error('Compression failed')); return; }
+          if (blob.size <= maxBytes || q < 0.2) resolve(blob);
+          else { q = Math.round((q - 0.1) * 10) / 10; tryExport(); }
+        }, 'image/jpeg', q);
+      })();
+    };
+    img.onerror = reject;
+    img.src = objUrl;
+  });
+}
+
+async function uploadToCloudinary(blob) {
+  var fd = new FormData();
+  fd.append('file', blob, 'logo.jpg');
+  fd.append('upload_preset', 'study-hub-logos');
+  var res = await fetch(
+    'https://api.cloudinary.com/v1_1/dtkfajq85/image/upload',
+    { method: 'POST', body: fd }
+  );
+  if (!res.ok) throw new Error('Upload failed ' + res.status);
+  var data = await res.json();
+  if (data.error) throw new Error(data.error.message);
+  return data.secure_url;
+}
+
+async function handleLogoFile(file) {
+  if (!file) return;
+  var status = document.getElementById('logo-upload-status');
+  function setStatus(msg) { if (status) status.textContent = msg; }
+  // Reset file input so same file can be re-selected
+  var fi = document.getElementById('logo-file-input');
+  if (fi) fi.value = '';
+  setStatus('Compressing…');
+  try {
+    var blob = await compressImage(file, 200 * 1024);
+    setStatus('Uploading…');
+    var url = await uploadToCloudinary(blob);
+    applyLogoUrl(url);
+    var lui = document.getElementById('logo-url-input');
+    if (lui) lui.value = url;
+    setStatus('');
+  } catch(e) {
+    setStatus('Something went wrong — try again.');
+  }
+}
+
+var _logoUrlTimer = null;
+function onLogoUrlInput(val) {
+  var errEl = document.getElementById('logo-url-error');
+  if (errEl) errEl.style.display = 'none';
+  clearTimeout(_logoUrlTimer);
+  var trimmed = val.trim();
+  if (!trimmed) { applyLogoUrl(''); return; }
+  _logoUrlTimer = setTimeout(function() {
+    var testImg = new Image();
+    testImg.onload = function() {
+      applyLogoUrl(trimmed);
+      var e = document.getElementById('logo-url-error');
+      if (e) e.style.display = 'none';
+      showSavedToast();
+    };
+    testImg.onerror = function() {
+      var e = document.getElementById('logo-url-error');
+      if (e) e.style.display = 'block';
+    };
+    testImg.src = trimmed;
+  }, 600);
+}
+
+function removeLogo() {
+  applyLogoUrl('');
+  var lui = document.getElementById('logo-url-input');
+  if (lui) lui.value = '';
+  var e = document.getElementById('logo-url-error');
+  if (e) e.style.display = 'none';
+  var s = document.getElementById('logo-upload-status');
+  if (s) s.textContent = '';
+}
+
+
+/* ─────────────────────────────────────────
+   Vibrant.js — load dynamically outside
+   sandboxed iframes (same pattern as QRious)
+─────────────────────────────────────────── */
+(function() {
+  try {
+    if (window.self === window.top) {
+      var vs = document.createElement('script');
+      vs.src = 'https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js';
+      vs.onerror = function() {};
+      vs.onload = function() {
+        if (window._pendingPaletteUrl) {
+          extractPalette(window._pendingPaletteUrl);
+          window._pendingPaletteUrl = null;
+        }
+      };
+      document.head.appendChild(vs);
+    }
+  } catch(_) {}
+})();
+
+
+/* ─────────────────────────────────────────
+   Color utilities
+─────────────────────────────────────────── */
+function hexToRgb(hex) {
+  hex = hex.replace('#','');
+  return { r:parseInt(hex.slice(0,2),16), g:parseInt(hex.slice(2,4),16), b:parseInt(hex.slice(4,6),16) };
+}
+function rgbToHex(r,g,b) {
+  return '#' + [r,g,b].map(function(v){
+    return Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0');
+  }).join('');
+}
+function darkenHex(hex, factor) {
+  var c = hexToRgb(hex);
+  return rgbToHex(c.r*factor, c.g*factor, c.b*factor);
+}
+
+/* ─────────────────────────────────────────
+   Vibrant palette extraction
+─────────────────────────────────────────── */
+function extractPalette(url) {
+  if (typeof Vibrant === 'undefined') {
+    window._pendingPaletteUrl = url; return;
+  }
+  try {
+    Vibrant.from(url).getPalette().then(function(p) {
+      if (!p) return;
+      var v  = p.Vibrant,  lv = p.LightVibrant,
+          dv = p.DarkVibrant, m = p.Muted, dm = p.DarkMuted;
+      var pAccent  = (v  && v.hex)  || CONFIG.accent;
+      var pBg      = (dv && dv.hex) || '#1a2a1a';
+      var pBgDark  = darkenHex(pBg, 0.65);
+      var pPageBg  = (dm && dm.hex) ? darkenHex(dm.hex, 0.7) : '#0d1f10';
+      var rAccent  = (lv && lv.hex) || (m && m.hex) || CONFIG.accent;
+      var rBg      = (v  && v.hex)  || CONFIG.heroBg;
+      var rBgDark  = (dv && dv.hex) || CONFIG.heroBgDark;
+      CONFIG.extractedPalette = {
+        primary: { accent:pAccent, heroBg:pBg,  heroBgDark:pBgDark, pageBg:pPageBg },
+        reverse: { accent:rAccent, heroBg:rBg,  heroBgDark:rBgDark, pageBg:pPageBg }
+      };
+      applyTheme('primary');
+    }).catch(function(){});
+  } catch(e) {}
+}
+
+/* ─────────────────────────────────────────
+   Apply a named theme
+─────────────────────────────────────────── */
+function applyTheme(name) {
+  CONFIG.theme = name;
+  var ep = CONFIG.extractedPalette;
+  if (name === 'primary' && ep) {
+    CONFIG.accent    = ep.primary.accent;
+    CONFIG.heroBg    = ep.primary.heroBg;
+    CONFIG.heroBgDark= ep.primary.heroBgDark;
+    CONFIG.pageBg    = ep.primary.pageBg;
+  } else if (name === 'reverse' && ep) {
+    CONFIG.accent    = ep.reverse.accent;
+    CONFIG.heroBg    = ep.reverse.heroBg;
+    CONFIG.heroBgDark= ep.reverse.heroBgDark;
+    CONFIG.pageBg    = ep.reverse.pageBg;
+  }
+  // Custom: colors are already in CONFIG from the pickers
+  applyConfig();
+  renderCalendarPills();
+  renderThemeSection();
+  saveConfig();
+}
+
+/* ─────────────────────────────────────────
+   Custom color picker handlers
+─────────────────────────────────────────── */
+function onAccentInput(val) {
+  CONFIG.accent = val;
+  applyConfig();
+  renderCalendarPills();
+  // Keep hex display in sync
+  var hexEl = document.getElementById('pick-accent-hex');
+  if (hexEl) hexEl.value = val.toUpperCase();
+  saveConfig();
+  showSavedToast();
+}
+function onAccentHexInput(val) {
+  if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+    var sw = document.getElementById('pick-accent');
+    if (sw) sw.value = val;
+    onAccentInput(val);
+    showSavedToast();
+  }
+}
+function onBgInput(val) {
+  CONFIG.heroBg     = val;
+  CONFIG.heroBgDark = darkenHex(val, 0.65);
+  CONFIG.pageBg     = darkenHex(val, 0.5);
+  applyConfig();
+  var hexEl = document.getElementById('pick-bg-hex');
+  if (hexEl) hexEl.value = val.toUpperCase();
+  saveConfig();
+  showSavedToast();
+}
+function onBgHexInput(val) {
+  if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+    var sw = document.getElementById('pick-bg');
+    if (sw) sw.value = val;
+    onBgInput(val);
+    showSavedToast();
+  }
+}
+
+/* ─────────────────────────────────────────
+   Render theme selector into settings
+─────────────────────────────────────────── */
+function _themeOptionHTML(name, label, accent, bg, selected) {
+  return '<button class="theme-option' + (selected ? ' selected' : '') + '"'
+    + ' data-theme="' + name + '"'
+    + ' onclick="applyTheme(this.dataset.theme)">'
+    + '<div class="theme-preview">'
+    + '<div class="theme-preview-bg" style="background:' + bg + '">'
+    + '<div class="theme-preview-accent" style="background:' + accent + '"></div>'
+    + '</div></div>'
+    + '<div class="theme-option-label">' + label + '</div>'
+    + '</button>';
+}
+
+function renderThemeSection() {
+  var el = document.getElementById('theme-section-body');
+  if (!el) return;
+  var ep  = CONFIG.extractedPalette;
+  var cur = CONFIG.theme || 'custom';
+  var h   = '<div class="theme-options">';
+
+  if (ep) {
+    h += _themeOptionHTML('primary', 'Primary',
+           ep.primary.accent, ep.primary.heroBg, cur==='primary');
+    h += _themeOptionHTML('reverse', 'Reverse',
+           ep.reverse.accent, ep.reverse.heroBg, cur==='reverse');
+  }
+  h += _themeOptionHTML('custom', 'Custom', CONFIG.accent, CONFIG.heroBg, cur==='custom');
+  h += '</div>';
+
+  if (!ep) {
+    h += '<div class="theme-hint">Upload a logo to unlock Primary and Reverse themes from its colors.</div>';
+  }
+
+  // Custom color pickers — always visible (allow manual overrides)
+  h += '<div class="custom-pickers">'
+    + '<div class="settings-field">'
+    + '<label class="settings-label">Accent</label>'
+    + '<div class="color-picker-wrap">'
+    + '<input type="color" class="color-picker-swatch" id="pick-accent"'
+    + ' value="' + CONFIG.accent + '" oninput="onAccentInput(this.value)">'
+    + '<input type="text" class="color-picker-hex" id="pick-accent-hex"'
+    + ' value="' + CONFIG.accent.toUpperCase() + '" maxlength="7"'
+    + ' oninput="onAccentHexInput(this.value)">'
+    + '</div></div>'
+    + '<div class="settings-field">'
+    + '<label class="settings-label">Background</label>'
+    + '<div class="color-picker-wrap">'
+    + '<input type="color" class="color-picker-swatch" id="pick-bg"'
+    + ' value="' + CONFIG.heroBg + '" oninput="onBgInput(this.value)">'
+    + '<input type="text" class="color-picker-hex" id="pick-bg-hex"'
+    + ' value="' + CONFIG.heroBg.toUpperCase() + '" maxlength="7"'
+    + ' oninput="onBgHexInput(this.value)">'
+    + '</div></div>'
+    + '</div>';
+
+  el.innerHTML = h;
+}
+
+/* ─────────────────────────────────────────
+   Settings page — open / close
+─────────────────────────────────────────── */
+function openSettings() {
+  // Pre-populate fields from live CONFIG
+  var n = document.getElementById('set-name');
+  var s = document.getElementById('set-school');
+  var m = document.getElementById('set-mascot');
+  if (n) n.value = CONFIG.name || '';
+  if (s) s.value = CONFIG.school || '';
+  if (m) m.value = CONFIG.mascot || '';
+  // Restore logo preview
+  var pw = document.getElementById('logo-preview-wrap');
+  var pi = document.getElementById('logo-preview');
+  if (pw && pi) { if (CONFIG.logoUrl) { pi.src = CONFIG.logoUrl; pw.style.display = 'flex'; }
+                   else pw.style.display = 'none'; }
+  var lui = document.getElementById('logo-url-input');
+  if (lui) lui.value = CONFIG.logoUrl || '';
+  document.getElementById('settings-page').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  renderThemeSection();
+}
+function closeSettings() {
+  document.getElementById('settings-page').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+
+/* ─────────────────────────────────────────
+   saveConfig — persists full CONFIG to
+   localStorage, preserving calendars and
+   any other stored keys
+─────────────────────────────────────────── */
+function saveConfig() {
+  try {
+    var cfg = { v: CONFIG.v };
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) cfg = JSON.parse(raw);
+    } catch(_) {}
+    Object.assign(cfg, CONFIG);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
+  } catch(_) {}
+}
+
+/* ─────────────────────────────────────────
+   Settings field input handlers
+   Each updates CONFIG, rebuilds derived
+   fields, repaints dashboard, saves.
+─────────────────────────────────────────── */
+function _rebuildFooter() {
+  CONFIG.footerText = CONFIG.school +
+    ' &nbsp;&middot;&nbsp; Home of the ' + CONFIG.mascot;
+}
+function onNameInput(v) {
+  CONFIG.name = v;
+  applyConfig();
+  saveConfig();
+  showSavedToast();
+}
+function onSchoolInput(v) {
+  CONFIG.school = v;
+  _rebuildFooter();
+  applyConfig();
+  saveConfig();
+  showSavedToast();
+}
+function onMascotInput(v) {
+  CONFIG.mascot = v;
+  _rebuildFooter();
+  applyConfig();
+  saveConfig();
+  showSavedToast();
+}
+
+
+/* ─────────────────────────────────────────
+   Step 5 — calendar editable flag toggle
+─────────────────────────────────────────── */
+function toggleCalEditable(idxStr) {
+  var idx = parseInt(idxStr, 10);
+  if (!CONFIG.calendars[idx]) return;
+  CONFIG.calendars[idx].editable = !CONFIG.calendars[idx].editable;
+  saveCalendars();
+  renderCalManage();
+  renderCalendarPills();  // lock icon on pills when editable=false
+}
+
+/* ─────────────────────────────────────────
+   Saved ✓ toast
+─────────────────────────────────────────── */
+var _toastTimer = null;
+function showSavedToast() {
+  var t = document.getElementById('settings-toast');
+  if (!t) return;
+  t.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function() {
+    t.classList.remove('show');
+  }, 1500);
+}
+
 /* ═══════════════════════════════════════
    INITIALISE
 ═══════════════════════════════════════ */
@@ -900,6 +1580,15 @@ try {
 } catch(e) {
   // Silent fallback — page renders with hardcoded defaults if init fails
 }
+
+/* ── Service worker registration ── */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function() {});
+}
+
+/* ── Re-render calendar embed when connectivity changes ── */
+window.addEventListener('online',  renderCalendarEmbed);
+window.addEventListener('offline', renderCalendarEmbed);
 </script>
 
 <!-- SHARE FAB -->
@@ -928,22 +1617,103 @@ try {
   <div class="share-section">
     <div class="share-section-label">Share with a Friend</div>
     <div class="share-desc">They get a blank version and set it up themselves &mdash; your calendars stay private. &#x1F604;</div>
-    <button class="share-copy-btn" id="share-copy-friend" onclick="copyURL('friend')" style="width:100%;margin-bottom:8px">Copy link</button>
-    <button class="share-qr-toggle" id="share-qrtoggle-friend" onclick="toggleQR('friend')">Show QR code &#x25be;</button>
-    <div class="share-qr-wrap" id="share-qr-friend" style="display:none"></div>
+    <div class="share-qr-wrap" id="share-qr-friend" style="display:flex"></div>
+    <div class="share-qr-label">Share with a Friend</div>
+    <button class="share-copy-btn" id="share-copy-friend" onclick="copyURL('friend')" style="width:100%;margin-top:8px">Copy link</button>
   </div>
   <!-- 2: Send to my other device -->
   <div class="share-section">
     <div class="share-section-label">Send to My Other Device</div>
     <div class="share-desc">Opens fully set up &mdash; calendars and settings are encoded right in the link.</div>
     <div class="share-qr-wrap" id="share-qr-device" style="display:flex"></div>
-    <p class="share-qr-note">Scan this &#x2014; it&#x2019;s easier than copying the link.</p>
-    <button class="share-copy-btn" id="share-copy-device" onclick="copyURL('device')" style="margin-top:6px;width:100%">Copy link</button>
+    <div class="share-qr-label">Send to My Other Device</div>
+    <button class="share-copy-btn" id="share-copy-device" onclick="copyURL('device')" style="margin-top:8px;width:100%">Copy link</button>
   </div>
   <!-- 3: Add to home screen -->
   <div class="share-section">
     <div class="share-section-label">Add to Home Screen</div>
     <div id="share-hs-content"><!-- filled by openShare() --></div>
+  </div>
+</div>
+
+<!-- SAVED TOAST -->
+<div class="settings-toast" id="settings-toast">Saved &#x2713;</div>
+
+<!-- SETTINGS PAGE -->
+<div class="settings-page" id="settings-page">
+  <div class="settings-header">
+    <div class="settings-header-inner">
+      <button class="settings-save-btn" onclick="closeSettings()" aria-label="Save">Save</button>
+      <span class="settings-title">Settings</span>
+    </div>
+  </div>
+  <div class="settings-body" id="settings-body">
+    <!-- Step 3: Logo management -->
+    <div class="settings-section">
+      <div class="settings-section-label">Logo</div>
+
+      <!-- Upload from device -->
+      <div>
+        <input type="file" id="logo-file-input"
+          accept="image/jpeg,image/png,image/gif,image/webp"
+          style="display:none" onchange="handleLogoFile(this.files[0])">
+        <button class="logo-upload-btn" onclick="document.getElementById('logo-file-input').click()">
+          &#x1F4F7; Upload from your device
+        </button>
+        <div id="logo-upload-status" class="logo-status"></div>
+      </div>
+
+      <!-- Preview + remove -->
+      <div id="logo-preview-wrap" class="logo-preview-wrap" style="display:none">
+        <img id="logo-preview" class="logo-preview-img" alt="Logo preview">
+        <div class="logo-preview-info">
+          <div class="logo-preview-label">Current logo</div>
+          <button class="logo-remove-btn" onclick="removeLogo()">Remove</button>
+        </div>
+      </div>
+
+      <!-- URL fallback -->
+      <div class="settings-field">
+        <label class="settings-label" for="logo-url-input">Or paste an image URL</label>
+        <input class="settings-input" id="logo-url-input" type="url"
+          placeholder="https://..." oninput="onLogoUrlInput(this.value)">
+        <div id="logo-url-error" class="logo-url-error" style="display:none">
+          This image couldn&#x2019;t load &#x2014; try downloading it and uploading from your device instead.
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Theme -->
+    <div class="settings-section">
+      <div class="settings-section-label">Theme</div>
+      <div id="theme-section-body"><!-- rendered by renderThemeSection() --></div>
+    </div>
+
+    <!-- Step 2: Profile fields -->
+    <div class="settings-section">
+      <div class="settings-section-label">About You</div>
+
+      <div class="settings-field">
+        <label class="settings-label" for="set-name">Your name</label>
+        <input class="settings-input" id="set-name" type="text"
+          placeholder="e.g. Xandy" maxlength="40" autocomplete="given-name"
+          oninput="onNameInput(this.value)">
+      </div>
+
+      <div class="settings-field">
+        <label class="settings-label" for="set-school">School</label>
+        <input class="settings-input" id="set-school" type="text"
+          placeholder="e.g. Jupiter High School" maxlength="60"
+          oninput="onSchoolInput(this.value)">
+      </div>
+
+      <div class="settings-field">
+        <label class="settings-label" for="set-mascot">Mascot or team name</label>
+        <input class="settings-input" id="set-mascot" type="text"
+          placeholder="e.g. Warriors, Green Wave" maxlength="40"
+          oninput="onMascotInput(this.value)">
+      </div>
+    </div>
   </div>
 </div>
 </body>
