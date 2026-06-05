@@ -49,12 +49,13 @@ self.addEventListener('fetch', function(e) {
 
   var url = req.url;
 
-  // Pass through: Google Calendar, Google APIs, Cloudinary, CDNs
+  // Pass through: Google Calendar, Google APIs, Cloudinary, Supabase, CDNs
   // — these must always come from the network
   if (
     url.indexOf('calendar.google.com') !== -1 ||
     url.indexOf('googleapis.com')      !== -1 ||
     url.indexOf('cloudinary.com')      !== -1 ||
+    url.indexOf('supabase.co')         !== -1 ||
     url.indexOf('cdn.jsdelivr.net')    !== -1 ||
     url.indexOf('fonts.googleapis.com')!== -1 ||
     url.indexOf('fonts.gstatic.com')   !== -1 ||
