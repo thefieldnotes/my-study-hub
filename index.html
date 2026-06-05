@@ -1806,7 +1806,12 @@ var _supaKey = 'sb_publishable_u5xSu6j2SJ3GLxYunumRTw_bJY2U37a';
       var ss = document.createElement('script');
       ss.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1';
       ss.onload = function() {
-        try { _supa = supabase.createClient(_supaUrl, _supaKey); }
+        try {
+          _supa = supabase.createClient(_supaUrl, _supaKey);
+          _supa.auth.signInAnonymously().catch(function(err) {
+            console.warn('Anon sign-in failed:', err);
+          });
+        }
         catch(err) { console.warn('Supabase init failed:', err); }
       };
       ss.onerror = function() { console.warn('Supabase CDN failed to load'); };
